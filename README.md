@@ -1,7 +1,7 @@
 # AppLogin
-Aplicação de Login e Cadastro de Usuários em Python com MySQLd,este projeto consiste na utilização de Python2.7 com a plataforma Kivy
+*OpenSource*
 
-*OpenSource(Codigo livre)*
+Aplicação de Login e Cadastro de Usuários em Python com MySQLd, este projeto consiste na utilização de Python2.7 com a plataforma Kivy
 
 ## Fases do Desenvolvimento:
 
