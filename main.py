@@ -46,8 +46,8 @@ class Login(App):
       layout.add_widget(Label(size_hint=(1,.2)))
       # layout X
       layout_x = BoxLayout(orientation='horizontal', size_hint=(1, .8))
-      layout_x.add_widget(Button(text='Entrar', size_hint=(1, .2), background_normal='game.png', border=(2,2,2,2),on_press= self.logar))
-      layout_x.add_widget(Button(text='Cadastrar-se', size_hint=(1, .2), background_normal='game.png', border=(2,2,2,2), on_press=self.register))
+      layout_x.add_widget(Button(text='Entrar', size_hint=(1, .2), background_normal='img/btn.png', border=(2,2,2,2),on_press= self.logar))
+      layout_x.add_widget(Button(text='Cadastrar-se', size_hint=(1, .2), background_normal='img/btn.png', border=(2,2,2,2), on_press=self.register))
       layout.add_widget(layout_x)
 
       page.add_widget(layout)
@@ -84,7 +84,7 @@ class Login(App):
           enc = cur.execute(sql)
           if enc:
               # Login..
-              z = z+1
+              pass
           else:
               # Not Login
               p = Popup(title='Login Error', content=Label(text="Usuario nao encontrado!"),size_hint=(.6, .2))
