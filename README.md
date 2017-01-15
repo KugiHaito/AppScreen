@@ -1,15 +1,17 @@
-# AppLogin
+#  :computer: AppLogin
 *OpenSource*
 
-Aplicação de Login e Cadastro de Usuários em Python com MySQLd, este projeto consiste na utilização de Python2.7 com a plataforma Kivy
+Aplicação de Login e Cadastro de Usuários em Python com MySQLdb, este projeto consiste na utilização de Python2.7 com a plataforma Kivy
 
-## Fases do Desenvolvimento:
+![alt tag](http://download.seaicons.com/icons/paomedia/small-n-flat/1024/window-layout-icon.png)
 
-1 - Layout e definição de funções*(Concluída)*
+## :snake: Fases do Desenvolvimento:
 
-2 - Funcionamento e layout da pagina Home de Usuário*(andamento..)*
+1 - Layout e definição de funções ✅
 
-3 - Correção de possiveis **bugs**
+2 - Funcionamento e layout da pagina Home de Usuário 🕓
 
-## Desenvovedor
-Kugi Haito
+3 - Correção de possiveis **bugs** 🐞
+
+## :coffee: Desenvovedor
+   👤 Kugi Haito
