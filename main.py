@@ -13,6 +13,7 @@ import MySQLdb as mysql
 
 con = mysql.connect(db="talkchat", user="root", passwd="youcode", host="127.0.0.1")
 cur = con.cursor()
+# Screens..
 
 class Home(BoxLayout):
     """docstring for Talkchat ."""
