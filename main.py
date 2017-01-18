@@ -1,106 +1,130 @@
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.checkbox import CheckBox
-from kivy.core.window import Window
-from kivy.uix.button import Button
-from kivy.uix.label import Label
-from kivy.uix.popup import Popup
-from kivy.app import App
-import time
-# Connect in LocalHost
+# Essential Packages
 import MySQLdb as mysql
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.core.window import Window
+from kivy.uix.screenmanager import ScreenManager, Screen
+# Interface Packages
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.checkbox import CheckBox
+from kivy.uix.textinput import TextInput
+from kivy.uix.boxlayout import BoxLayout
+# Information Definitions
 
 con = mysql.connect(db="talkchat", user="root", passwd="youcode", host="127.0.0.1")
 cur = con.cursor()
 
-class Home(BoxLayout):
-    def build(self, arg):
-        self.welcome = Label(text="Ola! Seja Bem Vindo!")
-        self.add_widget(self.welcome)
+# Secondary Code
+Builder.load_string("""
+<Login>:
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: 'Seja Bem Vindo'
+            font_size: 40
+            size_hint:(1, .4)
+        TextInput:
+            id:nick
+            hint_text: 'Nickname'
+            font_size:20
+            write_tab:False
+            size_hint:(1, .1)
+            background_color:(0,0,0,0)
+        TextInput:
+            id:pswd
+            hint_text: 'Password'
+            password:True
+            font_size:20
+            write_tab:False
+            size_hint:(1, .1)
+            background_color:(0,0,0,0)
+        Label:
+    BoxLayout:
+        orientation:'horizontal'
+        size_hint: (1,.1)
+        Button:
+            id: entry
+            text: 'Entrar'
+            size_hint: (1,.7)
+            border: (2,5,2,5)
+            #background_down:'img/btn.png'
+            background_normal:'img/btn.png'
+            on_press: root.log(nick.text, pswd.text)
+        Button:
+            text: 'Cadastrar-se'
+            size_hint: (1,.7)
+            border: (2,5,2,5)
+            #background_down:'img/btn.png'
+            background_normal:'img/btn.png'
+            on_press: root.reg(nick.text, pswd.text)
 
-class Login(App):
-  def build(self):
-      self.icon = 'icon.png'
-      # Window Settings
-      Window.clearcolor = (.6, .6, .6, .3)
-      # Layout
-      page = FloatLayout()
-      layout = BoxLayout(orientation='vertical')
-      self.hi = Label(text='Seja Bem Vindo!', size_hint=(1, .7), font_size=40)
-      self.nick = TextInput(text='Nickname..',size_hint=(1, .1), background_color=(0,0,0,0))
-      self.pswd = TextInput(text='Password..', password=True ,size_hint=(1, .1), background_color=(0,0,0,0))
-      self.save = CheckBox(size_hint=(.3, 1))
-      self.save.bind(active=self.saved)
-      layout.add_widget(self.hi)
-      layout.add_widget(self.nick)
-      layout.add_widget(self.pswd)
-      # Layout Y
-      layout_y = BoxLayout(orientation='horizontal', size_hint=(.3,.1))
-      layout_y.add_widget(self.save)
-      layout_y.add_widget(Label(text="Salvar Senha..", size_hint=(1, 1)))
-      layout.add_widget(layout_y)
-      layout.add_widget(Label(size_hint=(1,.2)))
-      # layout X
-      layout_x = BoxLayout(orientation='horizontal', size_hint=(1, .8))
-      layout_x.add_widget(Button(text='Entrar', size_hint=(1, .2), background_normal='img/btn.png', border=(2,2,2,2),on_press= self.logar))
-      layout_x.add_widget(Button(text='Cadastrar-se', size_hint=(1, .2), background_normal='img/btn.png', border=(2,2,2,2), on_press=self.register))
-      layout.add_widget(layout_x)
+<Home>:
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: 'Seja Bem Vindo!'
+            font_size:120
+        Button:
+            text: 'Logout'
+            size_hint:(1,.05)
+            on_press: root.manager.current = 'main'
+""")
 
-      page.add_widget(layout)
-
-      return page
-
-  def saved(self,checkbox, value):
-    # Salvar Apelido e Senha..
-    if value:
-        if self.nick.text == "Nickname.." or self.nick.text == "":
-            self.save.active = False
-            self.hi.color=(1,0,0,1)
-            self.hi.text = "Digite seu Nickname!"
-        elif self.pswd.text == "Password.." or self.pswd.text == "":
-            self.save.active = False
-            self.hi.color=(1,0,0,1)
-            self.hi.text = "Digite sua Password!"
+class Login(Screen):
+    # Functions
+    def log(args, n, p):
+        if n == "Nickname.." or n == "":
+            p = Popup(title='Login Error', content=Label(text="Digite seu apelido!", color=(1,0,0,1)),size_hint=(.6, .2))
+            p.open()
+        elif p == "Password.." or p == "":
+            p = Popup(title='Login Error', content=Label(text="Digite sua senha!", color=(1,0,0,1)),size_hint=(.6, .2))
+            p.open()
         else:
-            self.hi.color=(1,1,1,1)
-            self.hi.text = "Lembrarei de voce "+self.nick.text
+            sql = "select * from users where nickname ='"+n+"' and passwd='"+p+"'"
+            enc = cur.execute(sql)
+            if enc:
+                sm.current = 'space'
+                Window.size=(1366, 768)
+            else:
+                p = Popup(title='Login Error', content=Label(text="Usuario "+n+" nao encontrado!"),size_hint=(.6, .2))
+                p.open()
 
-  def logar(self, nick):
-      if self.nick.text == "Nickname.." or self.nick.text == "":
-          self.hi.color=(1,0,0,1)
-          self.hi.text = "Digite seu Nickname!"
-      elif self.pswd.text == "Password.." or self.pswd.text == "":
-          self.hi.color=(1,0,0,1)
-          self.hi.text = "Digite sua password!"
-      else:
-          sql = "select * from users where nickname ='"+self.nick.text+"' and passwd='"+self.pswd.text+"'"
-          enc = cur.execute(sql)
-          if enc:
-              # Login..
-              pass
-          else:
-              # Not Login
-              p = Popup(title='Login Error', content=Label(text="Usuario nao encontrado!"),size_hint=(.6, .2))
-              p.open()
-
-
-  def register(self, nick):
-    if self.nick.text == "Nickname.." or self.nick.text == "":
-        self.hi.color=(1,0,0,1)
-        self.hi.text = "Digite seu Nickname!"
-    elif self.pswd.text == "Password.." or self.pswd.text == "":
-        self.hi.color=(1,0,0,1)
-        self.hi.text = "Digite sua password!"
-    else:
-        sql = "select * from users where nickname = '"+self.nick.text+"'"
-        rows = cur.execute(sql)
+    def reg(args, n, p):
+        if n == "Nickname.." or n == "":
+            p = Popup(title='Login Error', content=Label(text="Digite seu apelido!", color=(1,0,0,1)),size_hint=(.6, .2))
+            p.open()
+        elif p == "Password.." or p == "":
+            p = Popup(title='Login Error', content=Label(text="Digite sua senha!", color=(1,0,0,1)),size_hint=(.6, .2))
+            p.open()
+        else:
+            sql = "select * from users where nickname = '"+n+"'"
+            rows = cur.execute(sql)
         if rows > 0:
-            self.hi.text = "Este nick esta em uso!"
+            p = Popup(title='Login Error', content=Label(text="Este apelido esta em uso!", color=(1,0,0,1)),size_hint=(.6, .2))
+            p.open()
         else:
-            sql = "insert into users (nickname, passwd, level, photo, online) values ('"+self.nick.text+"', '"+self.pswd.text+"', 'Usuario', default, '0')"
+            sql = "insert into users (nickname, passwd, level, photo, online) values ('"+n+"', '"+p+"', 'Usuario', default, '0')"
             cur.execute(sql)
             con.commit()
 
+class Home(Screen):
+    pass
+
+# Create the screen manager
+sm = ScreenManager()
+sm.add_widget(Login(name='main'))
+sm.add_widget(Home(name='space'))
+
+class AppLogin(App):
+    def build(self):
+        self.icon = 'img/icon.png'
+        # Window Settings
+        Window.fullscreen = False
+        Window.size = (620, 580)
+        Window.clearcolor = (.6, .6, .6, .4)
+        return sm
+
 if __name__ == '__main__':
-  Login().run()
+    AppLogin().run()
