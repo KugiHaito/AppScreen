@@ -15,7 +15,6 @@ con = mysql.connect(db="talkchat", user="root", passwd="youcode", host="127.0.0.
 cur = con.cursor()
 
 class Home(BoxLayout):
-    """docstring for Talkchat ."""
     def build(self, arg):
         self.welcome = Label(text="Ola! Seja Bem Vindo!")
         self.add_widget(self.welcome)
@@ -51,9 +50,6 @@ class Login(App):
       page.add_widget(layout)
 
       return page
-
-
-  # Alterar -> Trocar modificacao de text pra Popup
 
   def saved(self,checkbox, value):
     # Salvar Apelido e Senha..
@@ -105,7 +101,6 @@ class Login(App):
             sql = "insert into users (nickname, passwd, level, photo, online) values ('"+self.nick.text+"', '"+self.pswd.text+"', 'Usuario', default, '0')"
             cur.execute(sql)
             con.commit()
-            # Cadastrado! redirecione o usuario a nova janela
 
 if __name__ == '__main__':
   Login().run()
