@@ -13,15 +13,12 @@ import MySQLdb as mysql
 
 con = mysql.connect(db="talkchat", user="root", passwd="youcode", host="127.0.0.1")
 cur = con.cursor()
-# Screens..
 
 class Home(BoxLayout):
     """docstring for Talkchat ."""
     def build(self, arg):
         self.welcome = Label(text="Ola! Seja Bem Vindo!")
         self.add_widget(self.welcome)
-
-
 
 class Login(App):
   def build(self):
