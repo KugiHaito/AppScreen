@@ -9,7 +9,7 @@ Aplicação de Login e Cadastro de Usuários em Python com MySQLdb, este projeto
 
 1 - Layout e definição de funções ✅
 
-2 - Funcionamento e layout da pagina de Usuário 🕓
+2 - Funcionamento e layout da pagina de Usuario 🕓
 
 3 - Correção de possiveis **bugs** 🐞
 
