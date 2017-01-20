@@ -14,7 +14,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 # Information Definitions
 
-con = mysql.connect(db="talkchat", user="root", passwd="youcode", host="127.0.0.1")
+con = mysql.connect(db="AppLogin", user="root", passwd="", host="127.0.0.1")
 cur = con.cursor()
 
 # Secondary Code
