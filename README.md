@@ -1,9 +1,34 @@
-#  :computer: AppLogin
+#  :computer: AppLogin Beta
 *OpenSource*
 
-Aplicação de Login e Cadastro de Usuários em Python com MySQLdb, este projeto consiste na utilização de Python2.7 com a plataforma Kivy
-
 ![alt tag](img/icon.png)
+
+Aplicação de Login e Cadastro de Usuários em Python com PyMySQL, este projeto consiste na utilização de Python2.7(ou python3+) com a plataforma de interface gráfica Kivy
+
+## Uso:
+_[modo de teste]_
+
+* Primeiro importe o Banco de Dados:
+
+   ``sudo mysql -u root AppLogin < config.sql``
+
+* Agora importe o modulo **pymysql**:
+
+   ``sudo pip install pymysql``
+
+* Tudo Pronto! Agora é só executar:
+
+   ``python -u main.py``
+
+_caso seja usuário Windows, remova o sufixo "sudo", dos comandos.._
+
+## Funcionabilidades:
+
+* Login e Cadastro de Usuários
+
+* Lembrar(Apelido e Senha)
+
+* Acesso a pagina incial
 
 ## :snake: Fases do Desenvolvimento:
 
