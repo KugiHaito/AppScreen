@@ -1,7 +1,7 @@
 #  :computer: AppLogin
 *OpenSource*
 
-![alt tag](img/icon.png)
+![alt tag](img/icone.png)
 
 Aplicação de Login e Cadastro de Usuários em Python com PyMySQL, este projeto consiste na utilização de Python2.7(ou python3+) com a plataforma de interface gráfica Kivy
 
