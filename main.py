@@ -128,7 +128,6 @@ class Login(Screen):
             if pwd == "" and len(open(".saved/.pass.txt", "r").read()) > 0:
                 pswd = open(".saved/.pass.txt", "r").read()
             sql = "select * from users where nickname ='"+name+"' and passwd='"+pswd+"'"
-            print pswd
             enc = cur.execute(sql)
             if enc:
                 if c:
