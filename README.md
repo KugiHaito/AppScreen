@@ -30,19 +30,5 @@ _caso seja usuário Windows, remova o sufixo "sudo", dos comandos.._
 
 * Acesso a pagina incial
 
-## :snake: Fases do Desenvolvimento:
-
-1 - Layout e definição de funções ✅
-
-2 - Funcionamento da pagina de Usuário ✅
-
-3 - Habilitar funcão "Lembrar" ✅
-
-4 - Construção da pagina de Usuário 🕓
-
-5 - Construção da pagina de Perfil
-
-6 - Correção de possiveis **bugs** 🐞
-
 ## :coffee: Desenvovedor
    👤 Kugi Haito
