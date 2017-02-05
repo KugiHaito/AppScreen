@@ -1,6 +1,6 @@
 # Essential Packages
 import os
-# import md5
+import md5
 import pymysql as mysql
 from kivy.app import App
 from kivy.lang import Builder
@@ -15,8 +15,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 # Information Definitions
 
-# con = mysql.connect(db="AppLogin", user="root", passwd="youcode", host="127.0.0.1")
-# scur = con.cursor()
+con = mysql.connect(db="AppLogin", user="root", passwd="youcode", host="127.0.0.1")
+scur = con.cursor()
 
 # Secondary Code
 Builder.load_string("""
