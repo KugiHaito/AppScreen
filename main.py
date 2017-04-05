@@ -1,6 +1,6 @@
 # Essential Packages
 import os
-import md5
+import hashlib
 import pymysql as mysql
 from kivy.app import App
 from kivy.lang import Builder
@@ -15,7 +15,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 # Information Definitions
 
-con = mysql.connect(db="AppLogin", user="root", passwd="youcode", host="127.0.0.1")
+con = mysql.connect(db="AppLogin", user="root", passwd="", host="127.0.0.1")
 cur = con.cursor()
 
 # Secondary Code
@@ -72,7 +72,6 @@ Builder.load_string("""
             border: (2,5,2,5)
             background_color: (0,0,0,0)
             on_press: root.reg(nick.text, pswd.text, check.active)
-
 <Home>:
     BoxLayout:
         orientation:'vertical'
@@ -124,7 +123,7 @@ class Login(Screen):
         else:
             name = addslashes(n)
             pwd = addslashes(p)
-            pswd = md5.new(pwd).hexdigest()
+            pswd = hashlib.md5(b'pwd').hexdigest()
             if pwd == "" and len(open(".saved/.pass.txt", "r").read()) > 0:
                 pswd = open(".saved/.pass.txt", "r").read()
             sql = "select * from users where nickname ='"+name+"' and passwd='"+pswd+"'"
@@ -146,10 +145,10 @@ class Login(Screen):
             p = Popup(title='Login Error', content=Label(text="Digite sua senha!", color=(1,0,0,1)),size_hint=(.6, .2))
             p.open()
         else:
-            # Tratando dados..
+            # Handling data..
             name = addslashes(n)
             pwd = addslashes(p)
-            pswd = md5.new(pwd).hexdigest()
+            pswd = hashlib.md5(b'pwd').hexdigest()
             sql = "select * from users where nickname = '"+name+"'"
             rows = cur.execute(sql)
             if rows > 0:
