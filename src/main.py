@@ -18,7 +18,7 @@ from kivy.uix.boxlayout import BoxLayout
 con = mysql.connect(db="AppLogin", user="root", passwd="", host="127.0.0.1")
 cur = con.cursor()
 
-# Secondary Code
+# Interface Code
 Builder.load_string("""
 <Login>:
     BoxLayout:
