@@ -1,6 +1,7 @@
+# -*- coding: UTF-8 -*-
+
 # Essential Packages
 import os
-import md5
 import pymysql as mysql
 from kivy.app import App
 from kivy.lang import Builder
@@ -15,8 +16,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 # Information Definitions
 
-con = mysql.connect(db="AppLogin", user="root", passwd="youcode", host="127.0.0.1")
-scur = con.cursor()
+con = mysql.connect(db="AppLogin", user="root", passwd="", host="127.0.0.1")
+cur = con.cursor()
 
 # Secondary Code
 Builder.load_string("""
@@ -38,6 +39,7 @@ Builder.load_string("""
             background_color:(0,0,0,0)
         TextInput:
             id:pswd
+            text:open('.saved/.pass.txt','r').read()
             hint_text: 'Password'
             password:True
             font_size:20
@@ -59,19 +61,18 @@ Builder.load_string("""
         orientation:'horizontal'
         size_hint: (1,.1)
         Button:
+            id: entry
             text: 'Entrar'
-            font_size: 20
             size_hint: (1,.7)
             border: (2,5,2,5)
             background_color: (0,0,0,0)
             on_press: root.log(nick.text, pswd.text, check.active)
         Button:
             text: 'Cadastrar-se'
-            font_size: 20
             size_hint: (1,.7)
             border: (2,5,2,5)
             background_color: (0,0,0,0)
-            on_press: root.reg(nick.text, pswd.text, check.active)
+            on_press: root.reg(nick.text, pswd.text)
 
 <Home>:
     BoxLayout:
@@ -94,51 +95,55 @@ try:
     _pass.close()
     os.system("attrib +h .saved/")
 except:
-     print("The Folder saved not was created")
+    pass
 
 def addslashes(s):
     d = {'"':'\\"', "'":"\\'", "\0":"\\\0", "\\":"\\\\"}
     return ''.join(d.get(c, c) for c in s)
 
+# Screen's
 class Login(Screen):
     # Functions
-    def save(args, name, pswd):
-        try:
-            _name = open(".saved/.name.txt", "w")
-            _name.write(name)
-            _name.close()
-            _pass = open(".saved/.pass.txt", "w")
-            _pass.write(pswd)
-            _pass.close()
-            os.system("attrib +h .saved/")
-        except:
-            print("Error in saving..")
+    def pull():
+        _name = open(".saved/.name.txt", "r")
+        ni = _name.read()
+        _name.close()
+        _pass = open(".saved/.pass.txt", "r")
+        p = _pass.read()
+        _pass.close()
+        return ni
 
     def log(args, n, p, c):
-        if n == "":
+        if n == "Nickname.." or n == "":
             p = Popup(title='Login Error', content=Label(text="Digite seu apelido!", color=(1,0,0,1)),size_hint=(.6, .2))
             p.open()
-        elif p == "" and not len(open(".saved/.pass.txt", "r").read()) > 0:
+        elif p == "Password.." or p == "":
             p = Popup(title='Login Error', content=Label(text="Digite sua senha!", color=(1,0,0,1)),size_hint=(.6, .2))
             p.open()
         else:
             name = addslashes(n)
-            pwd = addslashes(p)
-            pswd = md5.new(pwd).hexdigest()
-            if pwd == "" and len(open(".saved/.pass.txt", "r").read()) > 0:
-                pswd = open(".saved/.pass.txt", "r").read()
+            pswd = addslashes(p)
             sql = "select * from users where nickname ='"+name+"' and passwd='"+pswd+"'"
             enc = cur.execute(sql)
             if enc:
                 if c:
-                    Login.save(args, name, pswd)
-                Window.size=(1366, 768)
+                    try:
+                        _name = open(".saved/.name.txt", "w")
+                        _name.write(name)
+                        _name.close()
+                        _pass = open(".saved/.pass.txt", "w")
+                        _pass.write(pswd)
+                        _pass.close()
+                        os.system("attrib +h .saved/")
+                    except:
+                        print("Error in saving..")
                 sm.current = 'space'
+                Window.size=(1366, 768)
             else:
                 p = Popup(title='Login Error', content=Label(text="Usuario "+n+" nao encontrado!"),size_hint=(.6, .2))
                 p.open()
 
-    def reg(args, n, p, c):
+    def reg(args, n, p):
         if n == "Nickname.." or n == "":
             p = Popup(title='Login Error', content=Label(text="Digite seu apelido!", color=(1,0,0,1)),size_hint=(.6, .2))
             p.open()
@@ -148,8 +153,7 @@ class Login(Screen):
         else:
             # Tratando dados..
             name = addslashes(n)
-            pwd = addslashes(p)
-            pswd = md5.new(pwd).hexdigest()
+            pswd = addslashes(p)
             sql = "select * from users where nickname = '"+name+"'"
             rows = cur.execute(sql)
             if rows > 0:
@@ -159,8 +163,9 @@ class Login(Screen):
                 sql = "insert into users (nickname, passwd, level, photo, online) values ('"+name+"', '"+pswd+"', 'Usuario', default, '0')"
                 cur.execute(sql)
                 con.commit()
-                Login.save(args, name, pswd)
-                sm.current = 'space'
+                p = Popup(title='Cadastramento Concluído', content=Label(text=name+", Cadastrado com sucesso!", color=(0,1,0,1)),size_hint=(.6, .2))
+                p.open()
+
 
 class Home(Screen):
     def quit(arg):
@@ -173,10 +178,10 @@ sm.add_widget(Home(name='space'))
 
 class AppLogin(App):
     def build(self):
-        self.icon = 'img/icone.png'
+        self.icon = 'img/icon.png'
         # Window Settings
         Window.fullscreen = False
-        Window.size = (620, 580)
+        Window.size = (720, 520)
         Window.clearcolor = (.6, .6, .6, .4)
         return sm
 
