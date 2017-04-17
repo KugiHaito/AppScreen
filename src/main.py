@@ -19,7 +19,7 @@ from kivy.uix.boxlayout import BoxLayout
 con = mysql.connect(db="AppLogin", user="root", passwd="", host="127.0.0.1")
 cur = con.cursor()
 
-# Secondary Code
+# Interface Code
 Builder.load_string("""
 <Login>:
     BoxLayout:
@@ -178,11 +178,11 @@ sm.add_widget(Home(name='space'))
 
 class AppLogin(App):
     def build(self):
-        self.icon = 'img/icon.png'
+        self.icon = 'img/icon.ico'
         # Window Settings
         Window.fullscreen = False
-        Window.size = (720, 520)
-        Window.clearcolor = (.6, .6, .6, .4)
+        Window.size = (820, 580)
+        Window.clearcolor = (.6,.6,.6,.4)
         return sm
 
 if __name__ == '__main__':
