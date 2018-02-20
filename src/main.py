@@ -1,22 +1,24 @@
-# -*- coding: UTF-8 -*-
-
-# Essential Packages
+# Packages: Essential
 import os
 import pymysql as mysql
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
-# Interface Packages
+# Packages: Interface
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
-# Information Definitions
 
-con = mysql.connect(db="AppLogin", user="root", passwd="", host="127.0.0.1")
+# Code: Information Definitions
+con = mysql.connect(
+    db="AppLogin",
+    user="root",
+    passwd="",
+    host="localhost")
 cur = con.cursor()
 
 # Interface Code
@@ -97,9 +99,11 @@ try:
 except:
     pass
 
+
 def addslashes(s):
-    d = {'"':'\\"', "'":"\\'", "\0":"\\\0", "\\":"\\\\"}
+    d = {'"': '\\"', "'": "\\'", "\0": "\\\0", "\\": "\\\\"}
     return ''.join(d.get(c, c) for c in s)
+
 
 # Screen's
 class Login(Screen):
@@ -163,7 +167,12 @@ class Login(Screen):
                 sql = "insert into users (nickname, passwd, level, photo, online) values ('"+name+"', '"+pswd+"', 'Usuario', default, '0')"
                 cur.execute(sql)
                 con.commit()
-                p = Popup(title='Cadastramento Concluído', content=Label(text=name+", Cadastrado com sucesso!", color=(0,1,0,1)),size_hint=(.6, .2))
+                p = Popup(
+                    title = 'Cadastramento Concluído',
+                    content = Label(text=name + ", Cadastrado com sucesso!",
+                    color = (0,1,0,1)),
+                    size_hint = (.6, .2)
+                    )
                 p.open()
 
 
@@ -171,10 +180,12 @@ class Home(Screen):
     def quit(arg):
         sm.current = 'main'
 
+
 # Create the screen manager
 sm = ScreenManager()
 sm.add_widget(Login(name='main'))
 sm.add_widget(Home(name='space'))
+
 
 class AppLogin(App):
     def build(self):
@@ -182,8 +193,9 @@ class AppLogin(App):
         # Window Settings
         Window.fullscreen = False
         Window.size = (820, 580)
-        Window.clearcolor = (.6,.6,.6,.4)
+        Window.clearcolor = (.6, .6, .6, .4)
         return sm
+
 
 if __name__ == '__main__':
     AppLogin().run()
