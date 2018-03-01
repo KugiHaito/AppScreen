@@ -1,0 +1,10 @@
+# Byte-compiled / otimized
+__pycache__/
+*.py[cod]
+
+# Specific to here
+examples/
+test/
+
+# Rope
+.ropeproject
