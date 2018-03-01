@@ -27,7 +27,7 @@ __version__ = '0.6.1-dev'
 if sys.version_info < (3, 6):
     raise RuntimeError('AppScreen needs at least Python 3.6')
 else:
-    sub_modules = [f for f in os.walk('app/')]
+    sub_modules = [f for f in os.walk('appscreen/')]
 
     for module, _, f in sub_modules:
         x = 0
