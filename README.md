@@ -13,8 +13,8 @@ See simple code code:
 from appscreen.layout import Blank
 
 app = Blank(
-    app_name='My App'
-    icon='myicon'
+    app_name='My App',
+    app_icon='myicon'
 )
 
 app.run()
