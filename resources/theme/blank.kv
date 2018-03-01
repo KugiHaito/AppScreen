@@ -1,0 +1,101 @@
+<Blank>:
+    BoxLayout:
+        orientation:'vertical'
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, .9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        ActionBar:
+            pos_hint: {'top':1}
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    title: '   {}'.format(root.get_appname())
+                    app_icon: root.get_icon('blank')
+                    app_icon_width: 25
+                    app_icon_height: 25
+                    with_previous: False
+                ActionGroup:
+                    background_normal: root.get_icon('more')
+                    background_down: root.get_icon('more')
+                    mode: 'spinner'
+                    size_hint_x: .15
+                    width: 90
+                    ActionButton:
+                        text: 'Back'
+                    ActionButton:
+                        text: 'Exit'
+                        on_press: app.stop()
+        TabbedPanel:
+            id: panel_navigation
+            tab_pos: 'bottom_mid'
+            tab_width: (self.width/3)
+            tab_height: 50
+            size_hint: 1, 1
+            pos_hint: {'center_x': .5, 'center_y': .9}
+            do_default_tab: False
+            canvas:
+                Color:
+                    rgba: (0, 0, 0, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            TabbedPanelItem:
+                id: home
+                text: 'Home'
+                background_color: (1, 1, 1, 1)
+                background_normal: root.get_icon('tab_normal')
+                background_down: root.get_icon('tab_down')
+                color:  (1, 1, 1, 1)
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, .95)
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    Label:
+                        text: '[i]No contents [b][{}][/b][/i]'.format(root.ids.home.text.upper())
+                        font_size:20
+                        color: 0, 0, 0, .3
+                        markup:True
+            TabbedPanelItem:
+                id: section
+                text: 'Section'
+                background_color: (1, 1, 1, 1)
+                background_normal: root.get_icon('tab_normal')
+                background_down: root.get_icon('tab_down')
+                color:  (1, 1, 1, 1)
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, .95)
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    Label:
+                        text: '[i]No contents [b][{}][/b][/i]'.format(root.ids.section.text.upper())
+                        font_size:20
+                        color: 0, 0, 0, .3
+                        markup:True
+            TabbedPanelItem:
+                id: about
+                text: 'About'
+                background_color: (1, 1, 1, 1)
+                background_normal: root.get_icon('tab_normal')
+                background_down: root.get_icon('tab_down')
+                color:  (1, 1, 1, 1)
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, .95)
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    Label:
+                        text: '[i]No contents [b][{}][/b][/i]'.format(root.ids.about.text.upper())
+                        font_size:20
+                        color: 0, 0, 0, .3
+                        markup:True
