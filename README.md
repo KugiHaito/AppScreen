@@ -1,34 +1,31 @@
-#  :computer: AppLogin
-*OpenSource*
+# AppScreen
 
-![alt tag](src/img/icone.png)
+AppScreen is a desktop application manager, using the
+Kivy graphical user interface (GUI). Enabling agile
+and effective creation and development
 
-Aplicação de Login e Cadastro de Usuários em Python com PyMySQL, este projeto consiste na utilização de Python2.7(ou python3+) com a plataforma de interface gráfica Kivy
+version 0.6.1-dev
 
-## :wave: Uso:
-_[modo de teste]_
+## How to use?
 
-* Primeiro importe o Banco de Dados:
+See simple code code:
+```
+from app.layout import Blank
 
-   ``sudo mysql -u root AppLogin < config.sql``
+app = Blank(
+    app_name='My App'
+    icon='myicon'
+)
 
-* Agora importe o modulo **pymysql**:
+app.run()
+```
 
-   ``sudo pip install pymysql``
+## Who do I talk to?
 
-* Tudo Pronto! Agora é só executar:
+You can talk to me by email, or by Twitter
 
-   ``python -u main.py``
+kugihaito99@gmail.com
 
-_caso seja usuário Windows, remova o sufixo "sudo", dos comandos.._
+https://twitter.com/KugiHaito
 
-## :wrench: Funcionabilidades:
-
-* Login e Cadastro de Usuários
-
-* Lembrar(Apelido e Senha)
-
-* Acesso a pagina incial
-
-## :coffee: Desenvovedor
-   👤 Kugi Haito
+I'm part of the [Boxcode Team](https://twitter.com/boxcodev), _this is another way to find me .._
