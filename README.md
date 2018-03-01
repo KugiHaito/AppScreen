@@ -10,7 +10,7 @@ version 0.6.1-dev
 
 See simple code code:
 ```
-from app.layout import Blank
+from appscreen.layout import Blank
 
 app = Blank(
     app_name='My App'
