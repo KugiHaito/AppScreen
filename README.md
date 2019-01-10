@@ -8,7 +8,7 @@ version 0.6.1-dev
 
 ## How to use?
 
-See simple code code:
+See simple code:
 ```
 from appscreen.layout import Blank
 
