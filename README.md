@@ -1,14 +1,19 @@
-# AppScreen
-
-AppScreen is a desktop application manager, using the
-Kivy graphical user interface (GUI). Enabling agile
-and effective creation and development
-
-version 0.6.1-dev
+<h1 align="center">AppScreen</h1>
+<p align="center">
+    AppScreen is a desktop application manager, using the
+    Kivy graphical user interface (GUI). Enabling agile
+    and effective creation and development
+    <br><br>
+    <img alt="GitHub release" src="https://img.shields.io/github/release-pre/KugiHaito/AppScreen.svg">
+    <img alt="GitHub" src="https://img.shields.io/github/license/KugiHaito/AppScreen.svg">
+    <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/KugiHaito/AppScreen.svg">
+    <img alt="Codacy grade" src="https://img.shields.io/codacy/grade/eee7324e4475469fb06b5250af5f63df.svg">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/KugiHaito/AppScreen.svg?style=flat">
+</p>
 
 ## How to use?
 
-See simple code code:
+See simple code:
 ```
 from appscreen.layout import Blank
 
@@ -20,12 +25,6 @@ app = Blank(
 app.run()
 ```
 
-## Who do I talk to?
-
-You can talk to me by email, or by Twitter
-
-kugihaito99@gmail.com
-
-https://twitter.com/KugiHaito
-
-I'm part of the [Boxcode Team](https://twitter.com/boxcodev), _this is another way to find me .._
+## Contact me
+[:email: via email](kugihaito99@gmail.com)
+[:bird: via twitter](https://twitter.com/KugiHaito)
